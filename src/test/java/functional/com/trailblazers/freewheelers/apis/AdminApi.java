@@ -85,7 +85,7 @@ public class AdminApi {
                     .setAccount_name(userName)
                     .setPassword(password)
                     .setEmail_address(emailFor(userName))
-                    .setPhoneNumber(SOME_PHONE_NUMBER)
+                    .setPhoneNumber(PHONE_NUMBER)
                     .setEnabled(true)
                     .setCountry_id(COUNTRY_ID);
     }

@@ -3,7 +3,7 @@ package functional.com.trailblazers.freewheelers;
 import org.junit.Test;
 
 import static functional.com.trailblazers.freewheelers.helpers.SyntaxSugar.ONLY_ONE_LEFT;
-import static functional.com.trailblazers.freewheelers.helpers.SyntaxSugar.SOME_PASSWORD;
+import static functional.com.trailblazers.freewheelers.helpers.SyntaxSugar.PASSWORD;
 
 public class OrderTest extends UserJourneyBase {
 
@@ -14,12 +14,12 @@ public class OrderTest extends UserJourneyBase {
         String Simplon_Frame = "Simplon Pavo 3 Ultra";
 
         admin
-                .there_is_an_admin(Arno, SOME_PASSWORD)
-                .there_is_a_user(Bob, SOME_PASSWORD)
+                .there_is_an_admin(Arno, PASSWORD)
+                .there_is_a_user(Bob, PASSWORD)
                 .there_is_a_frame(Simplon_Frame, ONLY_ONE_LEFT);
 
         user
-                .logs_in_with(Bob, SOME_PASSWORD)
+                .logs_in_with(Bob, PASSWORD)
                 .visits_home_page();
 
         screen
@@ -33,7 +33,7 @@ public class OrderTest extends UserJourneyBase {
                 .should_not_list_item(Simplon_Frame);
 
         user
-                .logs_in_with(Arno, SOME_PASSWORD)
+                .logs_in_with(Arno, PASSWORD)
                 .visits_admin_profile();
 
         screen

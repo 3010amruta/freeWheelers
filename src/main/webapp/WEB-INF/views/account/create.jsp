@@ -53,8 +53,8 @@
             <label for="fld_confirmPassword">Confirm Password</label>
             <div class="controls">
                 <input type="password" id="fld_confirmPassword" placeholder="secret password" name="confirmPassword" >
-                <c:if test="${validationMessage.userDetails.getPassword() != value}">
-                    <span class="text-error">${validationMessage.errors["password"]}</span>
+                <c:if test="${not empty validationMessage.errors['confirmPassword']}">
+                    <span class="text-error">${validationMessage.errors["confirmPassword"]}</span>
                 </c:if>
             </div>
         </div>

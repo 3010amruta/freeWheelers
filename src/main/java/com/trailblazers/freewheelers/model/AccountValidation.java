@@ -14,7 +14,7 @@ public class AccountValidation {
         }
 
         if(account.getPassword().isEmpty()) {
-            errors.put("password", "Must enter a password!");
+            errors.put("password", "Password can't be empty");
         }
         else if(!account.isPasswordValid()) {
             errors.put("validPassword", "Must enter a valid password!");

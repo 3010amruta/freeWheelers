@@ -13,6 +13,7 @@ public class Account {
     private String emailAddress;
     private String phoneNumber;
     private long country_id;
+    private String confirmPassword;
 
 
     public Account(String account_name, String password, boolean enabled, String emailAddress, String phoneNumber, long country_id) {
@@ -144,5 +145,14 @@ public class Account {
     public Country getCountry() {
 
         return countryService.get(this.country_id);
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public Account setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+        return this;
     }
 }

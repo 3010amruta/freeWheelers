@@ -1,25 +1,19 @@
 package com.trailblazers.freewheelers.web;
 
 import com.trailblazers.freewheelers.model.Account;
-import com.trailblazers.freewheelers.model.Country;
 import com.trailblazers.freewheelers.service.AccountService;
 import com.trailblazers.freewheelers.service.CountryService;
 import com.trailblazers.freewheelers.service.ServiceResult;
 import com.trailblazers.freewheelers.service.impl.AccountServiceImpl;
 import com.trailblazers.freewheelers.service.impl.CountryServiceImpl;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import sun.management.resources.agent;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +46,7 @@ public class AccountController {
     @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
     public ModelAndView processCreate(HttpServletRequest request) throws IOException {
 
+//        HashMap<String,String> resultFirst = CreateAccountRequestValidation.verifyInputs(request);
         Account account = makeAccount(request);
 
         try {
@@ -93,6 +88,7 @@ public class AccountController {
     }
 
     public Account makeAccount(HttpServletRequest httpRequest) {
+
         String email = httpRequest.getParameter("email");
         String password = httpRequest.getParameter("password");
         String name = httpRequest.getParameter("name");

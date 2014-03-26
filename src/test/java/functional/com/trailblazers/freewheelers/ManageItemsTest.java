@@ -17,13 +17,13 @@ public class ManageItemsTest extends UserJourneyBase {
         String New_Spoke_Name = "NEW - Spoke - Reflectors Arrow red";
 
         admin
-                .there_is_an_admin(Arno, SOME_PASSWORD)
+                .there_is_an_admin(Arno, PASSWORD)
                 .there_is_no_item(Simplon_Frame)
                 .there_is_no_item(Spoke_Reflectors)
                 .there_is_no_item(New_Simplon_Name)
                 .there_is_no_item(New_Spoke_Name);
         user
-                .logs_in_with(Arno, SOME_PASSWORD)
+                .logs_in_with(Arno, PASSWORD)
                 .wants_to_manage_items();
 
         user

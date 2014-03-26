@@ -76,7 +76,7 @@ public class AccountServiceImplTest {
         account.setEmail_address("example@example.com");
         account.setPassword("eXAmple12#");
         account.setAccount_name("Example Person");
-        account.setPhoneNumber(SyntaxSugar.SOME_PHONE_NUMBER);
+        account.setPhoneNumber(SyntaxSugar.PHONE_NUMBER);
         account.setCountry_id(1);
         return account;
     }

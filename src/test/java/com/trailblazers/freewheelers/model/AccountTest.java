@@ -22,17 +22,16 @@ public class AccountTest {
         account = new Account(countryServiceMock)
                 .setAccount_name("Bob")
                 .setPassword("password")
+                .setConfirmPassword("password")
                 .setEmail_address("foo@bar.com")
                 .setPhoneNumber("123443245")
                 .setCountry_id(1);
-
     }
 
     @Test
     public void testCreatingNewAccounts() throws Exception {
-
-
         assertThat(account.getAccount_name(), is("Bob"));
+        assertThat(account.getPassword(), is("password"));
         assertThat(account.getPassword(), is("password"));
         assertThat(account.getEmail_address(), is("foo@bar.com"));
         assertThat(account.getPhoneNumber(), is("123443245"));

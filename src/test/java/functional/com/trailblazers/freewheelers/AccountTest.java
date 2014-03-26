@@ -6,6 +6,7 @@ import static functional.com.trailblazers.freewheelers.helpers.SyntaxSugar.*;
 
 public class AccountTest extends UserJourneyBase {
 
+
     @Test
     public void testCreateAccount() throws Exception {
         String jan = "Jan Plewka";
@@ -15,29 +16,55 @@ public class AccountTest extends UserJourneyBase {
 
         user
                 .is_logged_out()
-                .logs_in_with(jan, SOME_PASSWORD);
+                .logs_in_with(jan, PASSWORD);
 
         screen
                 .shows_error_alert("login attempt was not successful");
 
         user
-                .creates_an_account(jan, SOME_EMAIL, SOME_PASSWORD, EMPTY_PASSWORD, COUNTRY);
+                .creates_an_account(jan, EMAIL, PASSWORD, CONFIRM_SOME_PASSWORD, EMPTY, COUNTRY);
 
         screen
                 .shows_error_alert("There were errors");
 
         user
-                .creates_an_account(jan, SOME_EMAIL, SOME_PASSWORD, SOME_PHONE_NUMBER, COUNTRY);
+                .creates_an_account(jan, EMAIL, PASSWORD, CONFIRM_SOME_PASSWORD, PHONE_NUMBER, COUNTRY);
 
         screen
                 .shows_message("account has been created");
 
         user
                 .is_logged_out()
-                .logs_in_with(jan, SOME_PASSWORD);
+                .logs_in_with(jan, PASSWORD);
 
         screen
                 .shows_in_navbar("Welcome " + jan);
+    }
+
+    @Test
+    public void shouldNotCreateAccountWhenPasswordIsEmpty() throws Exception {
+        String jan = "Jan Plewka";
+
+        admin
+                .there_is_no_account_for(jan);
+
+        user
+                .creates_an_account(jan, EMAIL, EMPTY, EMPTY, PHONE_NUMBER, COUNTRY);
+        screen
+                .shows_error_alert("There were errors");
+    }
+
+ @Test
+    public void shouldNotCreateAccountWhenConfirmPasswordIsDoesNotMatchPassword() throws Exception {
+        String jan = "Jan Plewka";
+
+        admin
+                .there_is_no_account_for(jan);
+
+        user
+                .creates_an_account(jan, EMAIL, PASSWORD, PASSWORD2, PHONE_NUMBER, COUNTRY);
+        screen
+                .shows_error_alert("There were errors");
     }
 
     @Test
@@ -49,7 +76,7 @@ public class AccountTest extends UserJourneyBase {
                 .there_is_no_account_for(jan);
 
         user
-                .creates_an_account(jan, SOME_EMAIL, SOME_PASSWORD, INVALID_PHONE_NUMBER, COUNTRY);
+                .creates_an_account(jan, EMAIL, PASSWORD, INVALID_PHONE_NUMBER, COUNTRY, COUNTRY);
         screen
                 .shows_error_alert("There were errors");
     }
@@ -64,19 +91,19 @@ public class AccountTest extends UserJourneyBase {
 
         user
                 .is_logged_out()
-                .logs_in_with(jan, SOME_PASSWORD);
+                .logs_in_with(jan, PASSWORD);
 
         screen
                 .shows_error_alert("login attempt was not successful");
 
         user
-                .creates_an_account(jan, SOME_EMAIL, SOME_PASSWORD, EMPTY_PASSWORD, COUNTRY);
+                .creates_an_account(jan, EMAIL, PASSWORD, EMPTY, COUNTRY, COUNTRY);
 
         screen
                 .shows_error_alert("There were errors");
 
         user
-                .creates_an_account(jan, SOME_EMAIL, SOME_PASSWORD, SOME_PHONE_NUMBER, COUNTRY_NOT_SELECTED);
+                .creates_an_account(jan, EMAIL, PASSWORD, PHONE_NUMBER, COUNTRY_NOT_SELECTED, COUNTRY);
         screen
                 .shows_error_alert("There were errors");
     }
@@ -88,8 +115,8 @@ public class AccountTest extends UserJourneyBase {
         String Arno = "Arno Admin";
 
         admin
-                .there_is_a_user(Hugo, SOME_PASSWORD)
-                .there_is_an_admin(Arno, SOME_PASSWORD);
+                .there_is_a_user(Hugo, PASSWORD)
+                .there_is_an_admin(Arno, PASSWORD);
 
         user
                 .is_logged_out()
@@ -98,7 +125,7 @@ public class AccountTest extends UserJourneyBase {
                 .shows_login();
 
         user
-                .logs_in_with(Hugo, SOME_PASSWORD)
+                .logs_in_with(Hugo, PASSWORD)
                 .visits_his_profile();
         screen
                 .shows_profile_for(Hugo);
@@ -109,7 +136,7 @@ public class AccountTest extends UserJourneyBase {
                 .shows_error_alert("access is denied");
 
         user
-                .logs_in_with(Arno, SOME_PASSWORD)
+                .logs_in_with(Arno, PASSWORD)
                 .visits_admin_profile();
         screen
                 .shows_admin_profile();
