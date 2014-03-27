@@ -20,6 +20,10 @@ public class AccountValidation {
             errors.put("validPassword", "Must enter a valid password!");
         }
 
+        if(!account.getConfirmPassword().equals(account.getPassword())){
+            errors.put("confirmPassword", "Confirm password must match password!");
+        }
+
         if(account.getAccount_name().isEmpty()) {
             errors.put("name", "Must enter a name!");
         }

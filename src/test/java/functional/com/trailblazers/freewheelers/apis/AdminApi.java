@@ -84,6 +84,7 @@ public class AdminApi {
         return new Account()
                     .setAccount_name(userName)
                     .setPassword(password)
+                    .setConfirmPassword(password)
                     .setEmail_address(emailFor(userName))
                     .setPhoneNumber(PHONE_NUMBER)
                     .setEnabled(true)

@@ -82,7 +82,7 @@ public class AccountControllerTest {
     @Test
     public void shouldMakeAnAccountObject() {
 
-        assertEquals(accountController.makeAccount(httpRequest), new Account(name, password, true, email, phoneNumber, country_id));
+        assertEquals(accountController.makeAccount(httpRequest), new Account(name, password, true, email, phoneNumber, country_id, password));
 
     }
 

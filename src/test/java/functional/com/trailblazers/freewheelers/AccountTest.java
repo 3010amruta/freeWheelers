@@ -22,13 +22,13 @@ public class AccountTest extends UserJourneyBase {
                 .shows_error_alert("login attempt was not successful");
 
         user
-                .creates_an_account(jan, EMAIL, PASSWORD, CONFIRM_SOME_PASSWORD, EMPTY, COUNTRY);
+                .creates_an_account(jan, EMAIL, PASSWORD, PASSWORD, EMPTY, COUNTRY);
 
         screen
                 .shows_error_alert("There were errors");
 
         user
-                .creates_an_account(jan, EMAIL, PASSWORD, CONFIRM_SOME_PASSWORD, PHONE_NUMBER, COUNTRY);
+                .creates_an_account(jan, EMAIL, PASSWORD, PASSWORD, PHONE_NUMBER, COUNTRY);
 
         screen
                 .shows_message("account has been created");
@@ -54,13 +54,25 @@ public class AccountTest extends UserJourneyBase {
                 .shows_error_alert("There were errors");
     }
 
- @Test
-    public void shouldNotCreateAccountWhenConfirmPasswordIsDoesNotMatchPassword() throws Exception {
+    @Test
+    public void shouldNotCreateAccountWhenPasswordIsInvalid() throws Exception {
         String jan = "Jan Plewka";
 
         admin
                 .there_is_no_account_for(jan);
 
+        user
+                .creates_an_account(jan, EMAIL, INVALID_PASSWORD, INVALID_PASSWORD, PHONE_NUMBER, COUNTRY);
+        screen
+                .shows_error_alert("There were errors");
+    }
+
+    @Test
+    public void shouldNotCreateAccountWhenConfirmPasswordIsDoesNotMatchPassword() throws Exception {
+        String jan = "Jan Plewka";
+
+        admin
+                .there_is_no_account_for(jan);
         user
                 .creates_an_account(jan, EMAIL, PASSWORD, PASSWORD2, PHONE_NUMBER, COUNTRY);
         screen

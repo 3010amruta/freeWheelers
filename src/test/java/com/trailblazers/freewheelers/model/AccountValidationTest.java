@@ -26,6 +26,7 @@ public class AccountValidationTest {
         account = new Account()
                 .setEmail_address(SOME_EMAIL)
                 .setPassword(SOME_PASSWORD)
+                .setConfirmPassword(SOME_PASSWORD)
                 .setAccount_name(SOME_NAME)
                 .setPhoneNumber(SOME_PHONE)
                 .setEnabled(true)
@@ -55,10 +56,11 @@ public class AccountValidationTest {
         String emptyPassword = "";
 
         account.setPassword(emptyPassword);
+        account.setConfirmPassword(emptyPassword);
 
         HashMap errors = verifyInputs(account);
 
-        assertThereIsOneErrorFor("password", "enter a password", errors);
+        assertThereIsOneErrorFor("password", "can't be empty", errors);
     }
 
     @Test
@@ -66,11 +68,23 @@ public class AccountValidationTest {
         String password = "hello";
 
         account.setPassword(password);
+        account.setConfirmPassword(password);
 
         HashMap errors = verifyInputs(account);
 
         assertThereIsOneErrorFor("validPassword", "enter a valid password", errors);
 
+    }
+
+    @Test
+    public void shouldComplainIfConfirmPasswordDoesNotMatchPassword() throws Exception {
+        String confirmPassword = "hello";
+
+        account.setConfirmPassword(confirmPassword);
+
+        HashMap errors = verifyInputs(account);
+
+        assertThereIsOneErrorFor("confirmPassword", "Confirm password must match password!", errors);
     }
 
     @Test

@@ -22,7 +22,7 @@ public class SyntaxSugar {
     public static final String REALLY_EXPENSIVE = "2899.00";
     public static final String SOME_DESCRIPTION = "4 x red, curved Arrow shape, screw fastening";
     public static final String A_LOT = "1000";
-    public static final String CONFIRM_SOME_PASSWORD = "";
+    public static final String INVALID_PASSWORD = "fdslfj23";
 
     public static String emailFor(String userName) {
         return userName.replace(' ', '-') + "@random-email.com";

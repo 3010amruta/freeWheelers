@@ -45,17 +45,11 @@ public class AccountController {
 
     @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
     public ModelAndView processCreate(HttpServletRequest request) throws IOException {
-
-//        HashMap<String,String> resultFirst = CreateAccountRequestValidation.verifyInputs(request);
         Account account = makeAccount(request);
-
         try {
             ServiceResult<Account> result = accountService.createAccount(account);
-
             if (result.hasErrors()) {
-
                 return showErrors(result.getErrors(), account);
-
             }
             return showSuccess(result.getModel());
         } catch (Exception e) {
@@ -91,12 +85,11 @@ public class AccountController {
 
         String email = httpRequest.getParameter("email");
         String password = httpRequest.getParameter("password");
+        String confirmPassword = httpRequest.getParameter("confirmPassword");
         String name = httpRequest.getParameter("name");
         String phoneNumber = httpRequest.getParameter("phoneNumber");
         long country_id = Long.parseLong(httpRequest.getParameter("country"));
 
-        Account account = new Account(name, password, true, email, phoneNumber, country_id);
-
-        return account;
+        return new Account(name, password, true, email, phoneNumber, country_id, confirmPassword);
     }
 }

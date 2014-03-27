@@ -16,7 +16,8 @@ public class Account {
     private String confirmPassword;
 
 
-    public Account(String account_name, String password, boolean enabled, String emailAddress, String phoneNumber, long country_id) {
+    public Account(String account_name, String password, boolean enabled, String emailAddress, String phoneNumber, long country_id, String confirmPassword) {
+        this.confirmPassword = confirmPassword;
         this.account_id = 0L;
         this.account_name = account_name;
         this.password = password;
@@ -123,24 +124,24 @@ public class Account {
         boolean hasUppercaseAndLowerCase = !password.equals(password.toLowerCase()) && !password.equals(password.toUpperCase());
         boolean isBetween8And20Characters = password.length() >= 8 && password.length() <= 20;
         boolean hasSpecial = !password.matches("[A-Za-z0-9 ]*");
-        boolean hasDigits = false;
-        hasDigits = containsDigit(hasDigits);
-
+        boolean hasDigits = !password.matches("[0-9]");
+//        boolean hasDigits = false;
+//        hasDigits = containsDigit(hasDigits);
         if (!(hasUppercaseAndLowerCase && hasSpecial && isBetween8And20Characters && hasDigits)){
             return false;
         }
         return true;
     }
 
-    private boolean containsDigit(boolean hasDigits) {
-        for (int characterNumber = 0; characterNumber < password.length(); characterNumber++) {
-            if (Character.isDigit(password.charAt(characterNumber))){
-                hasDigits = true;
-                break;
-            }
-        }
-        return hasDigits;
-    }
+//    private boolean containsDigit(boolean hasDigits) {
+//        for (int characterNumber = 0; characterNumber < password.length(); characterNumber++) {
+//            if (Character.isDigit(password.charAt(characterNumber))){
+//                hasDigits = true;
+//                break;
+//            }
+//        }
+//        return hasDigits;
+//    }
 
     public Country getCountry() {
 
